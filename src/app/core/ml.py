@@ -71,7 +71,7 @@ class Model:
         """
         return self.agg_predict(
             data=data,
-            pipeline_path=PIPELINE_PATH + "pipe_volume.zip",
+            pipeline_path=PIPELINE_PATH + "/pipe_volume.zip",
             target="sold_volume",
         )
 
@@ -82,7 +82,7 @@ class Model:
         """
         return self.agg_predict(
             data=data,
-            pipeline_path=PIPELINE_PATH + "pipe_count.zip",
+            pipeline_path=PIPELINE_PATH + "/pipe_count.zip",
             target="sold_count",
         )
 
@@ -99,7 +99,7 @@ class Model:
         return self.manufacturer_predict(
             data=data,
             sale_points=sale_points,
-            pipeline_path=PIPELINE_PATH + "pipe_manufacturer_volume.zip",
+            pipeline_path=PIPELINE_PATH + "/pipe_manufacturer_volume.zip",
             target="sold_count",
         )
 
@@ -115,7 +115,7 @@ class Model:
         return self.manufacturer_predict(
             data=data,
             sale_points=sale_points,
-            pipeline_path=PIPELINE_PATH + "pipe_manufacturer_count.zip",
+            pipeline_path=PIPELINE_PATH + "/pipe_manufacturer_count.zip",
             target="sold_count",
         )
 
