@@ -17,6 +17,7 @@ class Model:
         "sold_volume": "sum_price",
         "sold_count": "cnt",
     }
+    MANUFACTURER_COLUMNS = {"sold_volume": "price", "sold_count": "cnt"}
 
     def _predict(self, pipe):
         forecast = pipe.forecast()
@@ -54,8 +55,8 @@ class Model:
         pipeline_path: str - path to model pipeline
         target: str - sold_volume or sold_count
         """
-        data = self._region_agg(data, sale_points, self.TARGET_COLUMNS[target])
-        log.info(data.head().__repr__())
+        log.info(data.__repr__())
+        data = self._region_agg(data, sale_points, self.MANUFACTURER_COLUMNS[target])
         ts = self._procces_input(data, self.TARGET_COLUMNS[target], dropna=True)
         pipe = Pipeline.load(pipeline_path, ts=ts)
 
@@ -157,7 +158,7 @@ class Model:
     def _region_agg(self, data, sale_points, target_column: str):
         data = pd.DataFrame(data)
         sale_points = pd.DataFrame(sale_points)
-
+        log.info(data.head().__repr__())
         sale_points["region_code"] = sale_points["region_code"].astype(object)
         data["sum_price"] = data["price"] * data["cnt"]
 
