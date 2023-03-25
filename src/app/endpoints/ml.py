@@ -4,6 +4,7 @@ from sqlalchemy.orm import Session
 from app.core.dependencies import get_db
 from app.core.auth import oauth2_scheme, get_current_user
 from app.core.crud import get_points
+from app.core.models import AddSoldGoods
 from app.core.ml import (
     Model,
     shops_manufacturer,
@@ -34,12 +35,85 @@ async def predict_volume(token=Depends(oauth2_scheme), db: Session = Depends(get
         "region_code": [],
         "sum_price": [],
     }
-    
+
     for i in user.agr_sold:
         data["dt"].append(i.dt)
         data["region_code"].append(i.region_code)
         data["sum_price"].append(i.sum_price)
     result = model.volume_agg_predict(data)
+    return result
+
+
+@router.get("count_agg_predict")
+async def predict_count(token=Depends(oauth2_scheme), db: Session = Depends(get_db)):
+    user = get_current_user(db, token)
+    model = Model()
+    data = {
+        "dt": [],
+        "region_code": [],
+        "cnt": [],
+    }
+
+    for i in user.agr_sold:
+        data["dt"].append(i.dt)
+        data["region_code"].append(i.region_code)
+        data["sum_price"].append(i.sum_price)
+
+    result = model.volume_agg_predict(data)
+    return result
+
+
+@router.get("volume_manufacturer_predict")
+async def predict_manufacturer_volume(
+    token=Depends(oauth2_scheme), db: Session = Depends(get_db)
+):
+    user = get_current_user(db, token)
+    model = Model()
+    data1 = {"dt": [], "cnt": [], "price": [], "id_sp_": []}
+
+    # AddSoldGoods id_ps_ region_code
+    sale_points = {
+        "id_ps_": [],
+        "region_code": [],
+    }
+    for i in user.sold_goods:
+        data1["dt"].append(i.dt)
+        data1["cnt"].append(i.cnt)
+        data1["price"].append(i.price)
+        data1["id_sp_"].append(i.id_sp_)
+    # FIXME crud
+    for i in db.query(AddSoldGoods).all():
+        sale_points["id_ps_"].append(i.id_sp_)
+        sale_points["region_code"].append(i.region_code)
+
+    result = model.volume_manufacturer_predict(data1, sale_points)
+    return result
+
+
+@router.get("/count_manufacturer_predict")
+async def predict_manufacturer_count(
+    token=Depends(oauth2_scheme), db: Session = Depends(get_db)
+):
+    user = get_current_user(db, token)
+    model = Model()
+    data1 = {"dt": [], "cnt": [], "price": [], "id_sp_": []}
+
+    # AddSoldGoods id_ps_ region_code
+    sale_points = {
+        "id_ps_": [],
+        "region_code": [],
+    }
+    for i in user.sold_goods:
+        data1["dt"].append(i.dt)
+        data1["cnt"].append(i.cnt)
+        data1["price"].append(i.price)
+        data1["id_sp_"].append(i.id_sp_)
+    # FIXME crud
+    for i in db.query(AddSoldGoods).all():
+        sale_points["id_ps_"].append(i.id_sp_)
+        sale_points["region_code"].append(i.region_code)
+
+    result = model.count_manufacturer_predict(data1, sale_points)
     return result
 
 
