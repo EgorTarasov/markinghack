@@ -24,8 +24,8 @@ router = APIRouter(
 )
 
 
-@router.get("/predict")
-async def predict(token=Depends(oauth2_scheme), db: Session = Depends(get_db)):
+@router.get("/volume_agg_predict")
+async def predict_volume(token=Depends(oauth2_scheme), db: Session = Depends(get_db)):
     user = get_current_user(db, token)
 
     model = Model()
@@ -34,11 +34,12 @@ async def predict(token=Depends(oauth2_scheme), db: Session = Depends(get_db)):
         "region_code": [],
         "sum_price": [],
     }
+    
     for i in user.agr_sold:
         data["dt"].append(i.dt)
         data["region_code"].append(i.region_code)
         data["sum_price"].append(i.sum_price)
-    result = model.predict(data)
+    result = model.volume_agg_predict(data)
     return result
 
 
