@@ -1,3 +1,4 @@
+from typing import Union
 from datetime import datetime
 
 from pydantic import BaseModel, PrivateAttr, Field
@@ -45,7 +46,7 @@ class Token(BaseModel):
 
 
 class TokenData(BaseModel):
-    username: str | None = None
+    username: Union[str, None] = None
 
 
 # endregion Token

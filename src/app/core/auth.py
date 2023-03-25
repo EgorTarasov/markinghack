@@ -1,5 +1,5 @@
 from datetime import timedelta, datetime
-from typing import Optional
+from typing import Optional, Union
 
 
 from fastapi import HTTPException, Depends, status
@@ -31,7 +31,7 @@ def get_password_hash(password: str) -> str:
     return hashed_password
 
 
-def authenticate_user(db: Session, username: str, password: str) -> User | bool:
+def authenticate_user(db: Session, username: str, password: str) -> Union[User, bool]:
     """Авторизация пользователя
 
     Авторизация в <service name>
@@ -56,7 +56,7 @@ def sign_user(db: Session, username: str, password: str) -> User:
 
 
 def create_access_token(
-    data: dict[str, str | datetime], expires_delta: timedelta | None = None
+    data: dict[str, Union[str, datetime]], expires_delta: Union[timedelta, None] = None
 ) -> str:
     """Creating JWT token
 

@@ -5,7 +5,7 @@ from app.core.dependencies import get_db
 from app.core.auth import oauth2_scheme, get_current_user
 from app.core.crud import get_points
 from app.core.ml import (
-    Model,
+    # Model,
     shops_manufacturer,
     volumes_manufacturer_region,
     volumes_manufacturer,
@@ -267,6 +267,7 @@ async def get_popular_offline_metrics(
     # rewrite sql query
     user = get_current_user(db, token)
     start = perf_counter()
+
     log.info("computing...")
 
     sold_data = {
