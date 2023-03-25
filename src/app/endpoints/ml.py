@@ -44,7 +44,7 @@ async def predict_volume(token=Depends(oauth2_scheme), db: Session = Depends(get
     return result
 
 
-@router.get("count_agg_predict")
+@router.get("/count_agg_predict")
 async def predict_count(token=Depends(oauth2_scheme), db: Session = Depends(get_db)):
     user = get_current_user(db, token)
     model = Model()
@@ -57,13 +57,13 @@ async def predict_count(token=Depends(oauth2_scheme), db: Session = Depends(get_
     for i in user.agr_sold:
         data["dt"].append(i.dt)
         data["region_code"].append(i.region_code)
-        data["sum_price"].append(i.sum_price)
+        data["cnt"].append(i.sum_price)
 
     result = model.volume_agg_predict(data)
     return result
 
 
-@router.get("volume_manufacturer_predict")
+@router.get("/volume_manufacturer_predict")
 async def predict_manufacturer_volume(
     token=Depends(oauth2_scheme), db: Session = Depends(get_db)
 ):
@@ -83,7 +83,7 @@ async def predict_manufacturer_volume(
         data1["id_sp_"].append(i.id_sp_)
     # FIXME crud
     for i in db.query(AddSoldGoods).all():
-        sale_points["id_ps_"].append(i.id_sp_)
+        sale_points["id_sp_"].append(i.id_sp_)
         sale_points["region_code"].append(i.region_code)
 
     result = model.volume_manufacturer_predict(data1, sale_points)
@@ -110,7 +110,7 @@ async def predict_manufacturer_count(
         data1["id_sp_"].append(i.id_sp_)
     # FIXME crud
     for i in db.query(AddSoldGoods).all():
-        sale_points["id_ps_"].append(i.id_sp_)
+        sale_points["id_sp_"].append(i.id_sp_)
         sale_points["region_code"].append(i.region_code)
 
     result = model.count_manufacturer_predict(data1, sale_points)
