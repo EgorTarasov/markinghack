@@ -8,7 +8,7 @@ from app.core.settings import settings
 
 # region Yarik
 
-PIPELINE_PATH = r"/src/models"
+PIPELINE_PATH = r"src/models"
 
 
 class Model:
