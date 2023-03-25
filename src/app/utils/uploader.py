@@ -88,7 +88,21 @@ def upload_from_csv(db: Session, file: UserFile):
                     "postal_code",
                 ]:
                     model_type = 7
-
+                log.info(model_type)
+                log.info(row)
+                log.info(
+                    row
+                    == [
+                        "dt",
+                        "gtin",
+                        "prid",
+                        "inn",
+                        "id_sp_",
+                        "type_operation",
+                        "price",
+                        "cnt",
+                    ]
+                )
                 continue
             if model_type == 5:
                 goods.append(
