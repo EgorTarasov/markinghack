@@ -5,7 +5,7 @@ from app.core.dependencies import get_db
 from app.core.auth import oauth2_scheme, get_current_user
 from app.core.crud import get_points
 from app.core.ml import (
-    # Model,
+    Model,
     shops_manufacturer,
     volumes_manufacturer_region,
     volumes_manufacturer,
@@ -27,7 +27,7 @@ router = APIRouter(
 @router.get("/predict")
 async def predict(token=Depends(oauth2_scheme), db: Session = Depends(get_db)):
     user = get_current_user(db, token)
-    # model = Model()
+
     model = Model()
     data = {
         "dt": [],

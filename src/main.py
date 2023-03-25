@@ -11,6 +11,6 @@ if __name__ == "__main__":
         "main:app",
         reload=True,
         use_colors=True,
-        host="0.0.0.0",
-        port=8080,
+        host="94.45.223.241",
+        port=46877,
     )
