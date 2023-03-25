@@ -1,0 +1,16 @@
+venv/
+.idea/
+.vscode/
+.python-version
+*.pyc
+*.log
+__pycache__/
+docker/
+.env
+tests/
+data/
+.venv/
+backendvenv/
+*.sql
+*.csv
+*.session.sql
