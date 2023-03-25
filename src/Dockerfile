@@ -1,4 +1,4 @@
-FROM python:3.11
+FROM python:3.10.10-slim-buster
 
 # Select working directory
 WORKDIR /code
