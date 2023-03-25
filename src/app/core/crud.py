@@ -41,7 +41,7 @@ def save_item(db: Session, name: str, user: models.User) -> models.Item:
     return db_item
 
 
-def get_users_items(db: Session, user: models.User) -> list[models.Item]:
+def get_users_items(db: Session, user: models.User) -> list[models.Item] | None:
     items = user.items
     return items
 
@@ -82,3 +82,23 @@ def save_file(
 
 
 # endregion user files
+
+# region additional data
+
+
+def get_region_by_inn(db: Session, inn: str) -> int:
+    data = (
+        db.query(models.OrganizationRegion)
+        .filter(models.OrganizationRegion.inn == inn)
+        .one_or_none()
+    )
+    if data:
+        return data.region_code
+    return -1
+
+
+def get_points(db: Session):
+    return db.query(models.AddSoldGoods).all()
+
+
+# endregion additional data

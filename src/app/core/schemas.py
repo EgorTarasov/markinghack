@@ -106,4 +106,31 @@ class ListTransportedGoodsSchema(BaseModel):
     items: list[TransportedGoodsSchema]
 
 
+class AgrProducedGoodsSchema(BaseModel):
+    __id__: int = PrivateAttr(...)
+
+
 # endregion Goods
+
+
+# region mapPoint
+
+
+class MapPoint(BaseModel):
+    short: str = Field(...)
+    name: str = Field(...)
+    code: int = Field(...)
+    value: float = Field(...)
+
+    class Config:
+        schema_extra = {
+            "example": {
+                "short": "Мо",
+                "name": "Москва",
+                "code": 77,
+                "value": 100.0,
+            }
+        }
+
+
+# end   region mapPoint

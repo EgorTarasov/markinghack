@@ -1,6 +1,7 @@
 from typing import Any, Dict, List, Optional
+from os import path
 
-from pydantic import AnyHttpUrl, BaseSettings, PostgresDsn, validator
+from pydantic import AnyHttpUrl, BaseSettings, PostgresDsn, validator, FilePath
 from jose import constants
 
 
@@ -51,6 +52,7 @@ class Settings(BaseSettings):
 
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     STATIC_FILE_URL: str = "static/{username}_{filename}"
+    PIPELINE_PATH: str = r"pipeline/pipe.zip"
 
     class Config:
         case_sensitive = True
