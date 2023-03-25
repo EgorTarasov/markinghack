@@ -55,16 +55,19 @@ class Model:
         pipeline_path: str - path to model pipeline
         target: str - sold_volume or sold_count
         """
-        log.info(data.__repr__())
+        log.info("Preparing data")
         data = self._region_agg(data, sale_points, self.MANUFACTURER_COLUMNS[target])
         ts = self._procces_input(data, self.TARGET_COLUMNS[target], dropna=True)
         pipe = Pipeline.load(pipeline_path, ts=ts)
-
+        
+        log.info("Fitting model")
+        pipe = pipe.fit(ts)
         outp_df = self._predict(pipe)
         outp_df = outp_df.rename(
             columns={"timestamp": "dt", "target": target, "segment": "region_code"}
         )
-
+        
+        log.info("Returning prediction")
         return outp_df.to_dict(orient="records")
 
     def volume_agg_predict(self, data: dict) -> dict:
@@ -158,7 +161,6 @@ class Model:
     def _region_agg(self, data, sale_points, target_column: str):
         data = pd.DataFrame(data)
         sale_points = pd.DataFrame(sale_points)
-        log.info(data.head().__repr__())
         sale_points["region_code"] = sale_points["region_code"].astype(object)
         data["sum_price"] = data["price"] * data["cnt"]
 
