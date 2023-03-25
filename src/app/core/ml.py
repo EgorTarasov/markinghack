@@ -100,7 +100,7 @@ class Model:
             data=data,
             sale_points=sale_points,
             pipeline_path=PIPELINE_PATH + "/pipe_manufacturer_volume.zip",
-            target="sold_count",
+            target="sold_volume",
         )
 
     def count_manufacturer_predict(
