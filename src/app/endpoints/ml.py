@@ -59,7 +59,7 @@ async def predict_count(token=Depends(oauth2_scheme), db: Session = Depends(get_
         data["region_code"].append(i.region_code)
         data["cnt"].append(i.sum_price)
 
-    result = model.volume_agg_predict(data)
+    result = model.count_agg_predict(data)
     return result
 
 
@@ -73,7 +73,7 @@ async def predict_manufacturer_volume(
 
     # AddSoldGoods id_ps_ region_code
     sale_points = {
-        "id_ps_": [],
+        "id_sp_": [],
         "region_code": [],
     }
     for i in user.sold_goods:
@@ -100,7 +100,7 @@ async def predict_manufacturer_count(
 
     # AddSoldGoods id_ps_ region_code
     sale_points = {
-        "id_ps_": [],
+        "id_sp_": [],
         "region_code": [],
     }
     for i in user.sold_goods:
