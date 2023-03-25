@@ -5,6 +5,7 @@ from etna.datasets.tsdataset import TSDataset
 from etna.pipeline.pipeline import Pipeline
 
 from app.core.settings import settings
+from app.utils.logging import log
 
 # region Yarik
 
@@ -54,6 +55,7 @@ class Model:
         target: str - sold_volume or sold_count
         """
         data = self._region_agg(data, sale_points, self.TARGET_COLUMNS[target])
+        log.info(data.head().__repr__())
         ts = self._procces_input(data, self.TARGET_COLUMNS[target], dropna=True)
         pipe = Pipeline.load(pipeline_path, ts=ts)
 
