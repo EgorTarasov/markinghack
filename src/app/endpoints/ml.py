@@ -132,7 +132,7 @@ async def get_mertics(token=Depends(oauth2_scheme), db: Session = Depends(get_db
     start = perf_counter()
     log.info("computing...")
     # check if shops_manufacturer not in REGION_CODES objects
-    if "shops_manufacturer" in COMPUTED_METHODS:
+    if "shops_manufacturer" in COMPUTED_METHODS and any("shops_manufacturer" in i for i in REGION_CODES.values()):
         log.info(f"calculated {len(REGION_CODES)}  in {perf_counter() - start}")
         return list(REGION_CODES.values())
     start = perf_counter()

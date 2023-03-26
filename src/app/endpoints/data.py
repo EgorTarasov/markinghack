@@ -39,7 +39,7 @@ async def get_map(token=Depends(oauth2_scheme), db: Session = Depends(get_db)):
     log.info(COMPUTED_METHODS)
     if "volumes_manufacturer_region" in COMPUTED_METHODS:
         log.info("computation took %s seconds", perf_counter() - start)
-        return REGION_CODES
+        return list(REGION_CODES.values())
     log.info("computing...")
 
     a = crud.get_sold_goods_volume_metrics_by_region(db, user)

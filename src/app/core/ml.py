@@ -221,6 +221,7 @@ def shops_manufacturer(dict1: dict, dict2: dict) -> dict:
                 "id": id,  # id магазина (object)
                 "count": dt,
             }
+            log.info("+1")
 
     return REGION_CODES
 
