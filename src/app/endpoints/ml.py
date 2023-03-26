@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
+import json
 
 from app.core.dependencies import get_db
 from app.core.auth import oauth2_scheme, get_current_user
@@ -34,92 +35,105 @@ router = APIRouter(
 # # region Yarik ml
 
 
-# @router.get("/volume_agg_predict")
-# async def predict_volume(token=Depends(oauth2_scheme), db: Session = Depends(get_db)):
-#     user = get_current_user(db, token)
+@router.get("/volume_agg_predict")
+async def predict_volume(token=Depends(oauth2_scheme), db: Session = Depends(get_db)):
+    user = get_current_user(db, token)
 
-#     model = Model()
+    # model = Model()
 
-#     a = crud.get_agg_sold(db, user)
-#     dt, region_code, sum_price = zip(*a)
-#     data = {
-#         "dt": dt,
-#         "region_code": region_code,
-#         "sum_price": sum_price,
-#     }
-#     result = model.volume_agg_predict(data)
-#     return result
-
-
-# @router.get("/count_agg_predict")
-# async def predict_count(token=Depends(oauth2_scheme), db: Session = Depends(get_db)):
-#     user = get_current_user(db, token)
-#     model = Model()
-#     a = crud.get_agg_sold(db, user)
-#     dt, region_code, sum_price = zip(*a)
-#     data = {
-#         "dt": dt,
-#         "region_code": region_code,
-#         "sum_price": sum_price,
-#     }
-
-#     result = model.count_agg_predict(data)
-#     return result
+    # a = crud.get_agg_sold(db, user)
+    # dt, region_code, sum_price = zip(*a)
+    # data = {
+    #     "dt": dt,
+    #     "region_code": region_code,
+    #     "sum_price": sum_price,
+    # }
+    # result = model.volume_agg_predict(data)
+    with open("predictions/pred_agg_volume.json", "r") as file:
+        data = json.load(file)
+        return data
 
 
-# @router.get("/volume_manufacturer_predict")
-# async def predict_manufacturer_volume(
-#     token=Depends(oauth2_scheme), db: Session = Depends(get_db)
-# ):
-#     user = get_current_user(db, token)
-#     model = Model()
-#     data1 = {"dt": [], "cnt": [], "price": [], "id_sp_": []}
+@router.get("/count_agg_predict")
+async def predict_count(token=Depends(oauth2_scheme), db: Session = Depends(get_db)):
+    # user = get_current_user(db, token)
+    # model = Model()
+    # a = crud.get_agg_sold(db, user)
+    # dt, region_code, sum_price = zip(*a)
+    # data = {
+    #     "dt": dt,
+    #     "region_code": region_code,
+    #     "sum_price": sum_price,
+    # }
 
-#     # AddSoldGoods id_ps_ region_code
+    # result = model.count_agg_predict(data)
 
-#     for i in user.sold_goods:
-#         data1["dt"].append(i.dt)
-#         data1["cnt"].append(i.cnt)
-#         data1["price"].append(i.price)
-#         data1["id_sp_"].append(i.id_sp_)
-
-#     a = crud.get_points_for_mlcomputation(db)
-#     id_sp_, region_code = zip(*a)
-#     sale_points = {
-#         "id_sp_": id_sp_,
-#         "region_code": region_code,
-#     }
-#     result = model.volume_manufacturer_predict(data1, sale_points)
-#     return result
+    with open("predictions/pred_agg_count.json", "r") as file:
+        data = json.load(file)
+        return data
+    return result
 
 
-# @router.get("/count_manufacturer_predict")
-# async def predict_manufacturer_count(
-#     token=Depends(oauth2_scheme), db: Session = Depends(get_db)
-# ):
-#     user = get_current_user(db, token)
-#     model = Model()
-#     data1 = {"dt": [], "cnt": [], "price": [], "id_sp_": []}
+@router.get("/volume_manufacturer_predict")
+async def predict_manufacturer_volume(
+    token=Depends(oauth2_scheme), db: Session = Depends(get_db)
+):
+    # user = get_current_user(db, token)
+    # model = Model()
+    # data1 = {"dt": [], "cnt": [], "price": [], "id_sp_": []}
 
-#     # AddSoldGoods id_ps_ region_code
-#     sale_points = {
-#         "id_sp_": [],
-#         "region_code": [],
-#     }
-#     for i in user.sold_goods:
-#         data1["dt"].append(i.dt)
-#         data1["cnt"].append(i.cnt)
-#         data1["price"].append(i.price)
-#         data1["id_sp_"].append(i.id_sp_)
-#     a = crud.get_points_for_mlcomputation(db)
-#     id_sp_, region_code = zip(*a)
-#     sale_points = {
-#         "id_sp_": id_sp_,
-#         "region_code": region_code,
-#     }
+    # # AddSoldGoods id_ps_ region_code
 
-#     result = model.count_manufacturer_predict(data1, sale_points)
-#     return result
+    # for i in user.sold_goods:
+    #     data1["dt"].append(i.dt)
+    #     data1["cnt"].append(i.cnt)
+    #     data1["price"].append(i.price)
+    #     data1["id_sp_"].append(i.id_sp_)
+
+    # a = crud.get_points_for_mlcomputation(db)
+    # id_sp_, region_code = zip(*a)
+    # sale_points = {
+    #     "id_sp_": id_sp_,
+    #     "region_code": region_code,
+    # }
+    # result = model.volume_manufacturer_predict(data1, sale_points)
+    # return result
+    with open("predictions/pred_manu_volume.json", "r") as file:
+        data = json.load(file)
+        return data
+
+
+@router.get("/count_manufacturer_predict")
+async def predict_manufacturer_count(
+    token=Depends(oauth2_scheme), db: Session = Depends(get_db)
+):
+    # user = get_current_user(db, token)
+    # model = Model()
+    # data1 = {"dt": [], "cnt": [], "price": [], "id_sp_": []}
+
+    # # AddSoldGoods id_ps_ region_code
+    # sale_points = {
+    #     "id_sp_": [],
+    #     "region_code": [],
+    # }
+    # for i in user.sold_goods:
+    #     data1["dt"].append(i.dt)
+    #     data1["cnt"].append(i.cnt)
+    #     data1["price"].append(i.price)
+    #     data1["id_sp_"].append(i.id_sp_)
+    # a = crud.get_points_for_mlcomputation(db)
+    # id_sp_, region_code = zip(*a)
+    # sale_points = {
+    #     "id_sp_": id_sp_,
+    #     "region_code": region_code,
+    # }
+
+    # result = model.count_manufacturer_predict(data1, sale_points)
+    # return result
+
+    with open("predictions/pred_manu_count.json.json", "r") as file:
+        data = json.load(file)
+        return data
 
 
 # # endregion Yarik ml
