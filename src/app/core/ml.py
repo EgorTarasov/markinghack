@@ -46,10 +46,28 @@ class Model:
 
         outp_df = self._predict(pipe)
         outp_df = outp_df.rename(
-            columns={"timestamp": "dt", "target": target, "segment": "region_code"}
+            columns={
+                "timestamp": "dt",
+                "target": "prediction_value",
+                "segment": "region_code",
+            }
         )
-
-        return outp_df.to_dict(orient="records")
+        history = ts[ts.index[-30] :]
+        history = (
+            history.to_pandas()
+            .stack()
+            .reset_index()
+            .drop("feature", axis=1)
+            .melt("timestamp")
+        )
+        history = history.rename(
+            columns={
+                "timestamp": "dt",
+                "target": "history_value",
+                "segment": "region_code",
+            }
+        )
+        return outp_df.to_dict(orient="records") + history.to_dict(orient="records")
 
     def manufacturer_predict(
         self, data, sale_points, pipeline_path: str, target: str
@@ -76,7 +94,11 @@ class Model:
         pipe = pipe.fit(ts)
         outp_df = self._predict(pipe)
         outp_df = outp_df.rename(
-            columns={"timestamp": "dt", "target": target, "segment": "region_code"}
+            columns={
+                "timestamp": "dt",
+                "target": f"prediction",
+                "segment": "region_code",
+            }
         )
 
         log.info("Returning prediction")
@@ -260,8 +282,8 @@ def volumes_manufacturer_region(dict1, dict2):
         cnt = list(map(int, data["cnt"].values))
         REGION_CODES[i]["cnt"] = sum(cnt)
         REGION_CODES[i]["sum"] = sum(sum_price)
-        REGION_CODES[i]["norm_sum"] = round(sum(sum_price) / sum_price1, 3)
-        REGION_CODES[i]["cnt_norm"] = round(sum(cnt) / cnt1, 3)
+        REGION_CODES[i]["norm_sum"] = round(sum(sum_price) / sum_price1, 7)
+        REGION_CODES[i]["cnt_norm"] = round(sum(cnt) / cnt1, 7)
 
     df = pd.DataFrame(REGION_CODES)
 
@@ -271,8 +293,8 @@ def volumes_manufacturer_region(dict1, dict2):
     df.loc["cnt_norm"] = (df.loc["cnt_norm"] - min(df.loc["cnt_norm"])) / (
         max(df.loc["cnt_norm"]) - min(df.loc["cnt_norm"])
     )
-    df.loc["norm_sum"] = df.loc["norm_sum"].apply(lambda x: round(x, 3))
-    df.loc["cnt_norm"] = df.loc["cnt_norm"].apply(lambda x: round(x, 3))
+    df.loc["norm_sum"] = df.loc["norm_sum"].apply(lambda x: round(x, 7))
+    df.loc["cnt_norm"] = df.loc["cnt_norm"].apply(lambda x: round(x, 7))
 
     REGION_CODES = df.to_dict()
     return df.to_dict()
