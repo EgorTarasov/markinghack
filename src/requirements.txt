@@ -1,4 +1,5 @@
-etna
+pandas
+numpy
 uvicorn>=0.21.1
 fastapi>=0.95.0
 python-multipart>=0.0.6
