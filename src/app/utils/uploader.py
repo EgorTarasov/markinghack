@@ -25,8 +25,10 @@ def upload_from_csv(db: Session, file: UserFile):
         csv_reader = csv.reader(csvfile, delimiter=",")
         goods = []
         fields = []
+
         model_type = None
         for i, row in enumerate(csv_reader):
+            
             if not i:
                 log.info(row)
                 if (
@@ -88,7 +90,21 @@ def upload_from_csv(db: Session, file: UserFile):
                     "postal_code",
                 ]:
                     model_type = 7
-
+                log.info(model_type)
+                log.info(row)
+                log.info(
+                    row
+                    == [
+                        "dt",
+                        "gtin",
+                        "prid",
+                        "inn",
+                        "id_sp_",
+                        "type_operation",
+                        "price",
+                        "cnt",
+                    ]
+                )
                 continue
             if model_type == 5:
                 goods.append(
@@ -157,6 +173,7 @@ def upload_from_csv(db: Session, file: UserFile):
                         user=file.user,
                     )
                 )
+
             elif model_type == 3:
                 goods.append(
                     TransportedGoods(

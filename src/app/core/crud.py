@@ -1,9 +1,11 @@
-from typing import Optional
+from typing import Optional, Union
+from time import perf_counter
 
 from sqlalchemy.orm import Session
 
 from app.core import models
 from app.core import schemas
+from app.utils.logging import log
 
 # region user
 def save_user(
@@ -26,7 +28,7 @@ def save_user(
     return db_user
 
 
-def get_user_by_username(db: Session, username: str) -> models.User | None:
+def get_user_by_username(db: Session, username: str) -> Union[models.User, None]:
     return db.query(models.User).filter(models.User.username == username).one_or_none()
 
 
@@ -41,7 +43,7 @@ def save_item(db: Session, name: str, user: models.User) -> models.Item:
     return db_item
 
 
-def get_users_items(db: Session, user: models.User) -> list[models.Item] | None:
+def get_users_items(db: Session, user: models.User) -> Union[list[models.Item], None]:
     items = user.items
     return items
 
@@ -63,6 +65,27 @@ def get_sold_goods(
     db: Session, offset: int = 0, count: int = 100
 ) -> list[models.SoldGoods]:
     return db.query(models.SoldGoods).offset(offset).limit(count).all()
+
+
+def get_sold_goods_for_computation(db: Session, user: models.User):
+
+    # result = SomeModel.query.with_entities(SomeModel.col1, SomeModel.col2)
+    start = perf_counter()
+    result = (
+        db.query(models.SoldGoods)
+        .with_entities(
+            models.SoldGoods.dt,
+            models.SoldGoods.inn,
+            models.SoldGoods.id_sp_,
+            models.SoldGoods.type_operation,
+        )
+        .filter(models.SoldGoods.user_id == user.id)
+        .all()
+    )
+    log.info(
+        f"get_sold_goods_for_computation ({len(result)}): {perf_counter() - start}"
+    )
+    return result
 
 
 # endregion sold goods
@@ -97,8 +120,38 @@ def get_region_by_inn(db: Session, inn: str) -> int:
     return -1
 
 
-def get_points(db: Session):
-    return db.query(models.AddSoldGoods).all()
+def get_points_for_computation(
+    db: Session,
+):
+
+    result = (
+        db.query(models.AddSoldGoods)
+        .with_entities(
+            models.AddSoldGoods.id_sp_,
+            models.AddSoldGoods.region_code,
+            models.AddSoldGoods.city_with_type,
+            models.AddSoldGoods.postal_code,
+        )
+        .all()
+    )
+
+    return result
+
+
+def get_points_for_mlcomputation(
+    db: Session,
+):
+
+    result = (
+        db.query(models.AddSoldGoods)
+        .with_entities(
+            models.AddSoldGoods.id_sp_,
+            models.AddSoldGoods.region_code,
+        )
+        .all()
+    )
+
+    return result
 
 
 # endregion additional data
