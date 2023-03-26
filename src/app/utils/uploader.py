@@ -28,7 +28,8 @@ def upload_from_csv(db: Session, file: UserFile):
 
         model_type = None
         for i, row in enumerate(csv_reader):
-            
+            if i % 100 == 0:
+                log.info(i)
             if not i:
                 log.info(row)
                 if (
