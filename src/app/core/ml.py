@@ -212,16 +212,16 @@ def shops_manufacturer(dict1: dict, dict2: dict) -> dict:
     ]
 
     global REGION_CODES
-    if not "shops_manufacturer" in REGION_CODES[77]:
-        for i in map(int, shop_id["region_code"].unique()):
-            data = shop_id[shop_id["region_code"] == i][:5][["id_sp_", "dt"]]
-            id = list(map(str, data["id_sp_"].values))
-            dt = list(map(int, data["dt"].values))
-            REGION_CODES[i]["shops_manufacturer"] = {
-                "id": id,  # id магазина (object)
-                "count": dt,
-            }
-            log.info("+1")
+
+    for i in map(int, shop_id["region_code"].unique()):
+        data = shop_id[shop_id["region_code"] == i][:5][["id_sp_", "dt"]]
+        id = list(map(str, data["id_sp_"].values))
+        dt = list(map(int, data["dt"].values))
+        REGION_CODES[i]["shops_manufacturer"] = {
+            "id": id,  # id магазина (object)
+            "count": dt,
+        }
+        log.info("+1")
 
     return REGION_CODES
 
@@ -439,17 +439,19 @@ def shops_manufacturer_count_region(dict1: dict, dict2: dict) -> dict:
     count_shops = groups.groupby(["region_code", "Месяц"]).count()["cnt"].reset_index()
 
     info_popular = dict()
+    global REGION_CODES
     for i in map(int, count_shops["region_code"].unique()):
         data = count_shops[count_shops["region_code"] == i][["Месяц", "cnt"]]
         month = list(map(int, data["Месяц"].values))
         cnt = list(map(int, data["cnt"].values))
-        info_popular[i] = {
+
+        REGION_CODES[i]["shops_manufacturer_count_region"] = {
             "region_code": i,
             "month": month,
             "count": cnt,
         }  # месяц  # кол-во магазинов
 
-    return info_popular
+    return REGION_CODES
 
 
 def shops_manufacturer_count(dict1: dict, dict2: dict) -> dict:

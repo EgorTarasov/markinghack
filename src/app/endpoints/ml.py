@@ -132,7 +132,9 @@ async def get_mertics(token=Depends(oauth2_scheme), db: Session = Depends(get_db
     start = perf_counter()
     log.info("computing...")
     # check if shops_manufacturer not in REGION_CODES objects
-    if "shops_manufacturer" in COMPUTED_METHODS and any("shops_manufacturer" in i for i in REGION_CODES.values()):
+    if "shops_manufacturer" in COMPUTED_METHODS and any(
+        "shops_manufacturer" in i for i in REGION_CODES.values()
+    ):
         log.info(f"calculated {len(REGION_CODES)}  in {perf_counter() - start}")
         return list(REGION_CODES.values())
     start = perf_counter()
@@ -229,9 +231,9 @@ async def get_popular_offline_metrics_by_region(
 
     result = popular_offline_gtin_manufacturer_region(sold_data, additional_data)
     log.info(len(result))
-    print(result)
+
     log.info(f"calculated in {perf_counter() - start}")
-    return result
+    return list(result.values())
 
 
 @router.get("/popular_offline_gtin_manufacturer")
@@ -298,7 +300,7 @@ async def get_shops_manufacturer_count_region(
     token=Depends(oauth2_scheme), db: Session = Depends(get_db)
 ):
     if "shops_manufacturer_count_region" in COMPUTED_METHODS:
-        return REGION_CODES.values()
+        return list(REGION_CODES.values())
     user = get_current_user(db, token)
     start = perf_counter()
     a = crud.get_sold_goods_for_manufacturer_count_by_region(db, user)
@@ -317,7 +319,7 @@ async def get_shops_manufacturer_count_region(
     result = shops_manufacturer_count_region(sold_data, additional_data)
 
     log.info(f"calculated in {perf_counter() - start}")
-    return result
+    return list(result.values())
 
 
 @router.get("/shops_manufacturer_count")
