@@ -88,7 +88,85 @@ def get_sold_goods_for_computation(db: Session, user: models.User):
     return result
 
 
+def get_sold_goods_volume_metrics_by_region(db: Session, user: models.User):
+    start = perf_counter()
+    result = (
+        db.query(models.SoldGoods)
+        .with_entities(
+            models.SoldGoods.dt,
+            models.SoldGoods.id_sp_,
+            models.SoldGoods.price,
+            models.SoldGoods.cnt,
+        )
+        .filter(models.SoldGoods.user_id == user.id)
+        .all()
+    )
+    return result
+
+
+def get_sold_goods_for_offline_metrics(db: Session, user: models.User):
+    # "dt", "id_sp_", "gtin", "cnt", "price", "type_operation"
+    result = (
+        db.query(models.SoldGoods)
+        .with_entities(
+            models.SoldGoods.dt,
+            models.SoldGoods.id_sp_,
+            models.SoldGoods.gtin,
+            models.SoldGoods.type_operation,
+            models.SoldGoods.price,
+            models.SoldGoods.cnt,
+        )
+        .filter(models.SoldGoods.user_id == user.id)
+        .all()
+    )
+    return result
+
+
+def get_sold_goods_for_online_metrics(db: Session, user: models.User):
+    result = (
+        db.query(models.SoldGoods)
+        .with_entities(
+            models.SoldGoods.dt,
+            models.SoldGoods.gtin,
+            models.SoldGoods.type_operation,
+            models.SoldGoods.cnt,
+        )
+        .filter(models.SoldGoods.user_id == user.id)
+        .all()
+    )
+    return result
+
+
+def get_sold_goods_for_manufacturer_count_by_region(db: Session, user: models.User):
+    result = (
+        db.query(models.SoldGoods)
+        .with_entities(
+            models.SoldGoods.dt,
+            models.SoldGoods.id_sp_,
+            models.SoldGoods.cnt,
+        )
+        .filter(models.SoldGoods.user_id == user.id)
+        .all()
+    )
+    return result
+
+
 # endregion sold goods
+
+# region agg data
+def get_agg_sold(db: Session, user: models.User):
+    return (
+        db.query(models.AgrSold)
+        .with_entities(
+            models.AgrSold.dt, models.AgrSold.region_code, models.AgrSold.sum_price
+        )
+        .filter(models.AgrSold.user_id == user.id)
+        .all()
+    )
+
+
+# endregion
+
 
 # region user files
 def save_file(

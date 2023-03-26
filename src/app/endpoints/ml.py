@@ -12,6 +12,9 @@ from app.core.ml import (
     volumes_manufacturer,
     popular_offline_gtin_manufacturer_region,
     popular_offline_gtin_manufacturer,
+    popular_online_gtin_manufacturer,
+    shops_manufacturer_count_region,
+    shops_manufacturer_count,
 )
 
 from app.utils.logging import log
@@ -33,16 +36,14 @@ async def predict_volume(token=Depends(oauth2_scheme), db: Session = Depends(get
     user = get_current_user(db, token)
 
     model = Model()
-    data = {
-        "dt": [],
-        "region_code": [],
-        "sum_price": [],
-    }
 
-    for i in user.agr_sold:
-        data["dt"].append(i.dt)
-        data["region_code"].append(i.region_code)
-        data["sum_price"].append(i.sum_price)
+    a = crud.get_agg_sold(db, user)
+    dt, region_code, sum_price = zip(*a)
+    data = {
+        "dt": dt,
+        "region_code": region_code,
+        "sum_price": sum_price,
+    }
     result = model.volume_agg_predict(data)
     return result
 
@@ -51,16 +52,13 @@ async def predict_volume(token=Depends(oauth2_scheme), db: Session = Depends(get
 async def predict_count(token=Depends(oauth2_scheme), db: Session = Depends(get_db)):
     user = get_current_user(db, token)
     model = Model()
+    a = crud.get_agg_sold(db, user)
+    dt, region_code, sum_price = zip(*a)
     data = {
-        "dt": [],
-        "region_code": [],
-        "cnt": [],
+        "dt": dt,
+        "region_code": region_code,
+        "sum_price": sum_price,
     }
-
-    for i in user.agr_sold:
-        data["dt"].append(i.dt)
-        data["region_code"].append(i.region_code)
-        data["cnt"].append(i.sum_price)
 
     result = model.count_agg_predict(data)
     return result
@@ -126,6 +124,7 @@ async def predict_manufacturer_count(
 
 @router.get("/shops_manufacturer")
 async def get_mertics(token=Depends(oauth2_scheme), db: Session = Depends(get_db)):
+
     user = get_current_user(db, token)
     start = perf_counter()
     log.info("computing...")
@@ -150,64 +149,8 @@ async def get_mertics(token=Depends(oauth2_scheme), db: Session = Depends(get_db
     }
     log.info(f"prepared  data in {perf_counter() - start}")
     result = shops_manufacturer(sold_data, additional_data)
-    log.info(len(result))
-    print(result)
-    log.info(f"calculated in {perf_counter() - start}")
-    return result
 
-
-@router.get("/volumes_manufacturer_region")
-async def get_volume_metrics_by_region(
-    token=Depends(oauth2_scheme), db: Session = Depends(get_db)
-):
-    # rewrite sql query
-    user = get_current_user(db, token)
-    start = perf_counter()
-    log.info("computing...")
-
-    sold_data = {
-        "dt": [],
-        "gtin": [],
-        "prid": [],
-        "inn": [],
-        "id_sp_": [],
-        "type_operation": [],
-        "price": [],
-        "cnt": [],
-    }
-    for i in user.sold_goods:
-        sold_data["dt"].append(i.dt)
-        sold_data["gtin"].append(i.gtin)
-        sold_data["prid"].append(i.prid)
-        sold_data["inn"].append(i.inn)
-        sold_data["id_sp_"].append(i.id_sp_)
-        sold_data["type_operation"].append(i.type_operation)
-        sold_data["price"].append(i.price)
-        sold_data["cnt"].append(i.cnt)
-
-    additional_data = {
-        "id_sp_": [],
-        "inn": [],
-        "region_code": [],
-        "city_with_type": [],
-        "city_fias_id": [],
-        "postal_code": [],
-    }
-    points = get_points(db)
-    for i in points:
-        additional_data["id_sp_"].append(i.id_sp_)
-        additional_data["inn"].append(i.inn)
-        additional_data["region_code"].append(i.region_code)
-        additional_data["city_with_type"].append(i.city_with_type)
-        additional_data["city_fias_id"].append(i.city_fias_id)
-        additional_data["postal_code"].append(i.postal_code)
-    #
-    log.info("prepared data")
-
-    result = volumes_manufacturer_region(sold_data, additional_data)
-    log.info(len(result))
-    print(result)
-    log.info(f"calculated in {perf_counter() - start}")
+    log.info(f"calculated {len(result)}  in {perf_counter() - start}")
     return result
 
 
@@ -215,49 +158,28 @@ async def get_volume_metrics_by_region(
 async def get_volume_metrics(
     token=Depends(oauth2_scheme), db: Session = Depends(get_db)
 ):
-    # rewrite sql query
+    """Количество единиц товара и стоимость всего проданного товара для 1 производителя в целом"""
+
     user = get_current_user(db, token)
     start = perf_counter()
     log.info("computing...")
 
+    a = crud.get_sold_goods_volume_metrics_by_region(db, user)
+    dt, id_sp_, cnt, price = zip(*a)
     sold_data = {
-        "dt": [],
-        "gtin": [],
-        "prid": [],
-        "inn": [],
-        "id_sp_": [],
-        "type_operation": [],
-        "price": [],
-        "cnt": [],
+        "dt": dt,
+        "id_sp_": id_sp_,
+        "price": cnt,
+        "cnt": price,
     }
-    for i in user.sold_goods:
-        sold_data["dt"].append(i.dt)
-        sold_data["gtin"].append(i.gtin)
-        sold_data["prid"].append(i.prid)
-        sold_data["inn"].append(i.inn)
-        sold_data["id_sp_"].append(i.id_sp_)
-        sold_data["type_operation"].append(i.type_operation)
-        sold_data["price"].append(i.price)
-        sold_data["cnt"].append(i.cnt)
-
+    a = crud.get_points_for_mlcomputation(db)
+    id_sp_, region_code = zip(*a)
     additional_data = {
-        "id_sp_": [],
-        "inn": [],
-        "region_code": [],
-        "city_with_type": [],
-        "city_fias_id": [],
-        "postal_code": [],
+        "id_sp_": id_sp_,
+        "region_code": region_code,
     }
-    points = get_points(db)
-    for i in points:
-        additional_data["id_sp_"].append(i.id_sp_)
-        additional_data["inn"].append(i.inn)
-        additional_data["region_code"].append(i.region_code)
-        additional_data["city_with_type"].append(i.city_with_type)
-        additional_data["city_fias_id"].append(i.city_fias_id)
-        additional_data["postal_code"].append(i.postal_code)
-    #
-    log.info("prepared data")
+
+    log.info(f"prepared data in {perf_counter() - start}")
 
     result = volumes_manufacturer(sold_data, additional_data)
     log.info(len(result))
@@ -274,43 +196,25 @@ async def get_popular_offline_metrics_by_region(
     user = get_current_user(db, token)
     start = perf_counter()
     log.info("computing...")
-
+    a = crud.get_sold_goods_for_offline_metrics(db, user)
+    dt, id_sp_, gtin, type_operation, price, cnt = zip(*a)
     sold_data = {
-        "dt": [],
-        "gtin": [],
-        "prid": [],
-        "inn": [],
-        "id_sp_": [],
-        "type_operation": [],
-        "price": [],
-        "cnt": [],
+        "dt": dt,
+        "gtin": gtin,
+        "id_sp_": id_sp_,
+        "type_operation": type_operation,
+        "price": price,
+        "cnt": cnt,
     }
-    for i in user.sold_goods:
-        sold_data["dt"].append(i.dt)
-        sold_data["gtin"].append(i.gtin)
-        sold_data["prid"].append(i.prid)
-        sold_data["inn"].append(i.inn)
-        sold_data["id_sp_"].append(i.id_sp_)
-        sold_data["type_operation"].append(i.type_operation)
-        sold_data["price"].append(i.price)
-        sold_data["cnt"].append(i.cnt)
 
+    a = crud.get_points_for_mlcomputation(db)
+    id_sp_, region_code = zip(*a)
     additional_data = {
-        "id_sp_": [],
-        "inn": [],
-        "region_code": [],
-        "city_with_type": [],
-        "city_fias_id": [],
-        "postal_code": [],
+        "id_sp_": id_sp_,
+        "region_code": region_code,
     }
-    points = get_points(db)
-    for i in points:
-        additional_data["id_sp_"].append(i.id_sp_)
-        additional_data["inn"].append(i.inn)
-        additional_data["region_code"].append(i.region_code)
-        additional_data["city_with_type"].append(i.city_with_type)
-        additional_data["city_fias_id"].append(i.city_fias_id)
-        additional_data["postal_code"].append(i.postal_code)
+
+    log.info(f"prepared data in {perf_counter() - start}")
     #
     log.info("prepared data")
 
@@ -331,42 +235,20 @@ async def get_popular_offline_metrics(
 
     log.info("computing...")
 
+    a = crud.get_sold_goods_for_offline_metrics(db, user)
+    dt, id_sp_, gtin, type_operation, price, cnt = zip(*a)
     sold_data = {
-        "dt": [],
-        "gtin": [],
-        "prid": [],
-        "inn": [],
-        "id_sp_": [],
-        "type_operation": [],
-        "price": [],
-        "cnt": [],
+        "dt": dt,
+        "gtin": gtin,
+        "id_sp_": id_sp_,
+        "type_operation": type_operation,
+        "price": price,
+        "cnt": cnt,
     }
-    for i in user.sold_goods:
-        sold_data["dt"].append(i.dt)
-        sold_data["gtin"].append(i.gtin)
-        sold_data["prid"].append(i.prid)
-        sold_data["inn"].append(i.inn)
-        sold_data["id_sp_"].append(i.id_sp_)
-        sold_data["type_operation"].append(i.type_operation)
-        sold_data["price"].append(i.price)
-        sold_data["cnt"].append(i.cnt)
 
-    additional_data = {
-        "id_sp_": [],
-        "inn": [],
-        "region_code": [],
-        "city_with_type": [],
-        "city_fias_id": [],
-        "postal_code": [],
-    }
-    points = get_points(db)
-    for i in points:
-        additional_data["id_sp_"].append(i.id_sp_)
-        additional_data["inn"].append(i.inn)
-        additional_data["region_code"].append(i.region_code)
-        additional_data["city_with_type"].append(i.city_with_type)
-        additional_data["city_fias_id"].append(i.city_fias_id)
-        additional_data["postal_code"].append(i.postal_code)
+    a = crud.get_points_for_mlcomputation(db)
+    id_sp_, region_code = zip(*a)
+    additional_data = {"id_sp_": id_sp_, "region_code": region_code}
     #
     log.info("prepared data")
 
@@ -377,18 +259,76 @@ async def get_popular_offline_metrics(
     return result
 
 
-# @router.post("/create_user", response_model=UserSchema)
-# async def create_user(
-#     user: UserCreateSchema, db: Session = Depends(get_db)
-# ) -> UserSchema:
-#     user.password = get_password_hash(user.password)
-#     user = save_user(db, user.username, user.password, user.email)
-#     return UserSchema.from_orm(user)
+@router.get("/popular_online_gtin_manufacturer")
+async def get_popular_online_gtin_manufacturer(
+    token=Depends(oauth2_scheme), db: Session = Depends(get_db)
+):
+    # rewrite sql query
+    user = get_current_user(db, token)
+    start = perf_counter()
+    log.info("computing...")
+    a = crud.get_sold_goods_for_online_metrics(db, user)
+    dt, gtin, type_operation, cnt = zip(*a)
+    sold_data = {
+        "dt": dt,
+        "gtin": gtin,
+        "type_operation": type_operation,
+        "cnt": cnt,
+    }
+
+    log.info(f"prepared data in {perf_counter() - start}")
+    start = perf_counter()
+    result = popular_online_gtin_manufacturer(sold_data)
+
+    log.info(f"calculated in {perf_counter() - start}")
+    return result
 
 
-# @router.get("/me", response_model=UserSchema)
-# async def profile(
-#     token=Depends(oauth2_scheme), db: Session = Depends(get_db)
-# ) -> UserSchema:
-#     user = get_current_user(db, token)
-#     return UserSchema.from_orm(user)
+@router.get("/shops_manufacturer_count_region")
+async def get_shops_manufacturer_count_region(
+    token=Depends(oauth2_scheme), db: Session = Depends(get_db)
+):
+
+    user = get_current_user(db, token)
+    start = perf_counter()
+    a = crud.get_sold_goods_for_manufacturer_count_by_region(db, user)
+    dt, id_sp_, cnt = zip(*a)
+    sold_data = {
+        "dt": dt,
+        "id_sp_": id_sp_,
+        "cnt": cnt,
+    }
+
+    a = crud.get_points_for_mlcomputation(db)
+    id_sp_, region_code = zip(*a)
+    additional_data = {"id_sp_": id_sp_, "region_code": region_code}
+    log.info(f"prepared data in {perf_counter() - start}")
+    start = perf_counter()
+    result = shops_manufacturer_count_region(sold_data, additional_data)
+
+    log.info(f"calculated in {perf_counter() - start}")
+    return result
+
+
+@router.get("/shops_manufacturer_count")
+async def get_shops_manufacturer_count(
+    token=Depends(oauth2_scheme), db: Session = Depends(get_db)
+):
+
+    user = get_current_user(db, token)
+    start = perf_counter()
+    a = crud.get_sold_goods_for_manufacturer_count_by_region(db, user)
+    dt, id_sp_, cnt = zip(*a)
+    sold_data = {
+        "dt": dt,
+        "id_sp_": id_sp_,
+        "cnt": cnt,
+    }
+
+    a = crud.get_points_for_mlcomputation(db)
+    id_sp_, region_code = zip(*a)
+    additional_data = {"id_sp_": id_sp_, "region_code": region_code}
+    log.info(f"prepared data in {perf_counter() - start}")
+    result = shops_manufacturer_count_region(sold_data, additional_data)
+    log.info(f"calculated in {perf_counter() - start}")
+    return result
