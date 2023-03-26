@@ -120,6 +120,7 @@ def upload_from_csv(db: Session, file: UserFile):
                         cnt=int(row[7]),
                         sum_price=int(row[8]),
                         user=file.user,
+                        user_id=file.user.id,
                     )
                 )
             elif model_type == 4:
@@ -132,6 +133,7 @@ def upload_from_csv(db: Session, file: UserFile):
                         count_brand=int(row[4]),
                         cnt=int(row[5]),
                         user=file.user,
+                        user_id=file.user.id,
                     )
                 )
             elif model_type == 6:
@@ -146,6 +148,7 @@ def upload_from_csv(db: Session, file: UserFile):
                         count_brand=int(row[6]),
                         cnt_moved=int(row[7]),
                         user=file.user,
+                        user_id=file.user.id,
                     )
                 )
             elif model_type == 1:
@@ -157,6 +160,7 @@ def upload_from_csv(db: Session, file: UserFile):
                         prid=str(row[3]),
                         operation_type=str(row[4]),
                         cnt=int(row[5]),
+                        user_id=file.user.id,
                         user=file.user,
                     )
                 )
@@ -171,6 +175,7 @@ def upload_from_csv(db: Session, file: UserFile):
                         type_operation=str(row[5]),
                         price=int(row[6]),
                         cnt=int(row[7]),
+                        user_id=file.user.id,
                         user=file.user,
                     )
                 )
@@ -184,6 +189,7 @@ def upload_from_csv(db: Session, file: UserFile):
                         sender_inn=str(row[3]),
                         receiver_inn=str(row[4]),
                         cnt_moved=int(row[5]),
+                        user_id=file.user.id,
                         user=file.user,
                     )
                 )
@@ -205,7 +211,7 @@ def upload_from_csv(db: Session, file: UserFile):
                         postal_code=posttal_code,
                     )
                 )
-        db.add_all(goods)
+        db.bulk_save_objects(goods)
         db.commit()
         log.info(f"Uploaded {len(goods)} goods in {perf_counter() - start} seconds")
 
