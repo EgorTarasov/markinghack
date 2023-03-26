@@ -1,9 +1,11 @@
 from typing import Optional, Union
+from time import perf_counter
 
 from sqlalchemy.orm import Session
 
 from app.core import models
 from app.core import schemas
+from app.utils.logging import log
 
 # region user
 def save_user(
@@ -65,6 +67,27 @@ def get_sold_goods(
     return db.query(models.SoldGoods).offset(offset).limit(count).all()
 
 
+def get_sold_goods_for_computation(db: Session, user: models.User):
+
+    # result = SomeModel.query.with_entities(SomeModel.col1, SomeModel.col2)
+    start = perf_counter()
+    result = (
+        db.query(models.SoldGoods)
+        .with_entities(
+            models.SoldGoods.dt,
+            models.SoldGoods.inn,
+            models.SoldGoods.id_sp_,
+            models.SoldGoods.type_operation,
+        )
+        .filter(models.SoldGoods.user_id == user.id)
+        .all()
+    )
+    log.info(
+        f"get_sold_goods_for_computation ({len(result)}): {perf_counter() - start}"
+    )
+    return result
+
+
 # endregion sold goods
 
 # region user files
@@ -97,9 +120,38 @@ def get_region_by_inn(db: Session, inn: str) -> int:
     return -1
 
 
-def get_points(db: Session):
+def get_points_for_computation(
+    db: Session,
+):
 
-    return db.query(models.AddSoldGoods).all()
+    result = (
+        db.query(models.AddSoldGoods)
+        .with_entities(
+            models.AddSoldGoods.id_sp_,
+            models.AddSoldGoods.region_code,
+            models.AddSoldGoods.city_with_type,
+            models.AddSoldGoods.postal_code,
+        )
+        .all()
+    )
+
+    return result
+
+
+def get_points_for_mlcomputation(
+    db: Session,
+):
+
+    result = (
+        db.query(models.AddSoldGoods)
+        .with_entities(
+            models.AddSoldGoods.id_sp_,
+            models.AddSoldGoods.region_code,
+        )
+        .all()
+    )
+
+    return result
 
 
 # endregion additional data

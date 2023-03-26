@@ -4,6 +4,8 @@ from etna.datasets.tsdataset import TSDataset
 
 from etna.pipeline.pipeline import Pipeline
 
+from etna.transforms import TimeSeriesImputerTransform
+
 from app.core.settings import settings
 from app.utils.logging import log
 
@@ -56,17 +58,24 @@ class Model:
         target: str - sold_volume or sold_count
         """
         log.info("Preparing data")
-        data = self._region_agg(data, sale_points, self.MANUFACTURER_COLUMNS[target])
+        data = self._region_agg(data, sale_points, self.TARGET_COLUMNS[target])
         ts = self._procces_input(data, self.TARGET_COLUMNS[target], dropna=True)
+        ts.fit_transform(
+            [
+                TimeSeriesImputerTransform(
+                    in_column="target", strategy="running_mean", window=3
+                )
+            ]
+        )
         pipe = Pipeline.load(pipeline_path, ts=ts)
-        
+
         log.info("Fitting model")
         pipe = pipe.fit(ts)
         outp_df = self._predict(pipe)
         outp_df = outp_df.rename(
             columns={"timestamp": "dt", "target": target, "segment": "region_code"}
         )
-        
+
         log.info("Returning prediction")
         return outp_df.to_dict(orient="records")
 
@@ -135,6 +144,7 @@ class Model:
             }
         )
         df["timestamp"] = pd.to_datetime(df["timestamp"])
+        log.info(df.columns)
         df = df[["timestamp", "target", "segment"]]
 
         df = df.dropna()
@@ -178,7 +188,15 @@ class Model:
 
 def shops_manufacturer(dict1: dict, dict2: dict) -> dict:
     """Торговые точки по регионам, которые чаще всего выводят товары из оборота
-    для 1 производителя"""
+    для 1 производителя
+
+    Args:
+        dict1 (dict):
+        dict2 (dict):
+
+    Returns:
+        dict: _description_
+    """
 
     dop_data = pd.DataFrame(dict1)
     shops = pd.DataFrame(dict2)

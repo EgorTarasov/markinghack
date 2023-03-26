@@ -1,9 +1,11 @@
-from fastapi import APIRouter, Depends
+from typing import Union
+
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.core.dependencies import get_db
 from app.core.auth import get_password_hash, oauth2_scheme, get_current_user
-from app.core.crud import save_user
+from app.core.crud import save_user, get_user_by_username
 from app.core.schemas import UserSchema, UserCreateSchema
 
 router = APIRouter(
@@ -16,7 +18,10 @@ router = APIRouter(
 @router.post("/create_user", response_model=UserSchema)
 async def create_user(
     user: UserCreateSchema, db: Session = Depends(get_db)
-) -> UserSchema:
+) -> Union[UserSchema, None]:
+    db_user = get_user_by_username(db, user.username)
+    if db_user:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="User exists")
     user.password = get_password_hash(user.password)
     user = save_user(db, user.username, user.password, user.email)
     return UserSchema.from_orm(user)
