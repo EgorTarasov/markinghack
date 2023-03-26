@@ -16,6 +16,7 @@ from app.core.ml import (
     shops_manufacturer_count_region,
     shops_manufacturer_count,
     REGION_CODES,
+    COMPUTED_METHODS,
 )
 
 from app.utils.logging import log
@@ -131,9 +132,9 @@ async def get_mertics(token=Depends(oauth2_scheme), db: Session = Depends(get_db
     start = perf_counter()
     log.info("computing...")
     # check if shops_manufacturer not in REGION_CODES objects
-    if any("shops_manufacturer" in d for d in REGION_CODES.values()):
+    if "shops_manufacturer" in COMPUTED_METHODS:
         log.info(f"calculated {len(REGION_CODES)}  in {perf_counter() - start}")
-        return REGION_CODES
+        return list(REGION_CODES.values())
     start = perf_counter()
     a = crud.get_sold_goods_for_computation(db, user)
     dt, inn, id_sp_, type_operation = zip(*a)
@@ -164,8 +165,6 @@ async def get_volume_metrics(
     token=Depends(oauth2_scheme), db: Session = Depends(get_db)
 ):
     """Количество единиц товара и стоимость всего проданного товара для 1 производителя в целом"""
-    if any("volumes_manufacturer" in d for d in REGION_CODES.values()):
-        log.info(f"calculated {len(REGION_CODES)}  in {perf_counter() - start}")
     user = get_current_user(db, token)
     start = perf_counter()
     log.info("computing...")
@@ -200,11 +199,9 @@ async def get_popular_offline_metrics_by_region(
 ):
     # rewrite sql query
     start = perf_counter()
-    if any(
-        "popular_offline_gtin_manufacturer_region" in d for d in REGION_CODES.values()
-    ):
+    if "popular_offline_gtin_manufacturer_region" in COMPUTED_METHODS:
         log.info(f"calculated in {perf_counter() - start}")
-        return REGION_CODES
+        return list(REGION_CODES.values())
     user = get_current_user(db, token)
 
     log.info("computing...")
@@ -300,7 +297,8 @@ async def get_popular_online_gtin_manufacturer(
 async def get_shops_manufacturer_count_region(
     token=Depends(oauth2_scheme), db: Session = Depends(get_db)
 ):
-
+    if "shops_manufacturer_count_region" in COMPUTED_METHODS:
+        return REGION_CODES.values()
     user = get_current_user(db, token)
     start = perf_counter()
     a = crud.get_sold_goods_for_manufacturer_count_by_region(db, user)

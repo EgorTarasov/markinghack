@@ -14,6 +14,7 @@ from app.utils.logging import log
 
 PIPELINE_PATH = r"src/models"
 REGION_CODES = {i["geoname_code"]: i for i in json.load(open("src/regions.json", "r"))}
+COMPUTED_METHODS = {}
 
 
 class Model:
@@ -191,6 +192,7 @@ class Model:
 def shops_manufacturer(dict1: dict, dict2: dict) -> dict:
     """Торговые точки по регионам, которые чаще всего выводят товары из оборота
     для 1 производителя"""
+    COMPUTED_METHODS["shops_manufacturer"] = True
 
     dop_data = pd.DataFrame(dict1)
     shops = pd.DataFrame(dict2)
@@ -224,6 +226,7 @@ def shops_manufacturer(dict1: dict, dict2: dict) -> dict:
 
 
 def volumes_manufacturer_region(dict1, dict2):
+    COMPUTED_METHODS["volumes_manufacturer_region"] = True
     """от 0 до 1 для heatmap"""
 
     dop_data = pd.DataFrame(dict1)
@@ -256,10 +259,11 @@ def volumes_manufacturer_region(dict1, dict2):
         cnt = list(map(int, data["cnt"].values))
         REGION_CODES[i]["cnt"] = sum(cnt)
         REGION_CODES[i]["sum"] = sum(sum_price)
-        REGION_CODES[i]["norm_sum"] = sum(sum_price) / sum_price1
-        REGION_CODES[i]["cnt_norm"] = sum(cnt) / cnt1
+        REGION_CODES[i]["norm_sum"] = round(sum(sum_price) / sum_price1, 3)
+        REGION_CODES[i]["cnt_norm"] = round(sum(cnt) / cnt1, 3)
 
     df = pd.DataFrame(REGION_CODES)
+
     df.loc["norm_sum"] = (df.loc["norm_sum"] - min(df.loc["norm_sum"])) / (
         max(df.loc["norm_sum"]) - min(df.loc["norm_sum"])
     )
@@ -268,9 +272,7 @@ def volumes_manufacturer_region(dict1, dict2):
     )
     df.loc["norm_sum"] = df.loc["norm_sum"].apply(lambda x: round(x, 3))
     df.loc["cnt_norm"] = df.loc["cnt_norm"].apply(lambda x: round(x, 3))
-    log.info(df)
-    df.fillna("")
-    log.info(df)
+
     REGION_CODES = df.to_dict()
     return df.to_dict()
 
@@ -316,7 +318,7 @@ def popular_offline_gtin_manufacturer_region(dict1: dict, dict2: dict) -> dict:
     для 1 производителя по регионам
     +
     """
-
+    COMPUTED_METHODS["popular_offline_gtin_manufacturer_region"] = True
     dop_data = pd.DataFrame(dict1)
     shops = pd.DataFrame(dict2)
     shops = shops[["id_sp_", "region_code"]]
@@ -417,7 +419,7 @@ def popular_online_gtin_manufacturer(dict1: dict) -> dict:
 
 def shops_manufacturer_count_region(dict1: dict, dict2: dict) -> dict:
     """Количество торговых точек по регионам для 1 производителя"""
-
+    COMPUTED_METHODS["shops_manufacturer_count_region"] = True
     dop_data = pd.DataFrame(dict1)
     shops = pd.DataFrame(dict2)
     shops = shops[["id_sp_", "region_code"]]

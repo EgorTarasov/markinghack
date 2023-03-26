@@ -23,7 +23,7 @@ from app.core.settings import settings
 from app.utils.logging import log
 from app.utils.uploader import upload_from_csv
 from app.core import crud
-from app.core.ml import volumes_manufacturer_region
+from app.core.ml import volumes_manufacturer_region, REGION_CODES, COMPUTED_METHODS
 
 
 router = APIRouter(prefix="/data", tags=["data"])
@@ -36,6 +36,10 @@ router = APIRouter(prefix="/map", tags=["map"])
 async def get_map(token=Depends(oauth2_scheme), db: Session = Depends(get_db)):
     user = get_current_user(db, token)
     start = perf_counter()
+    log.info(COMPUTED_METHODS)
+    if "volumes_manufacturer_region" in COMPUTED_METHODS:
+        log.info("computation took %s seconds", perf_counter() - start)
+        return REGION_CODES
     log.info("computing...")
 
     a = crud.get_sold_goods_volume_metrics_by_region(db, user)

@@ -7,10 +7,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 1,
-    "sum": 37,
-    "norm_sum": 0.37,
-    "cnt": 42,
-    "cnt_norm": 0.42
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Башкортостан",
@@ -20,10 +20,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 2,
-    "sum": 48,
-    "norm_sum": 0.48,
-    "cnt": 57,
-    "cnt_norm": 0.57
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Бурятия",
@@ -33,10 +33,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 3,
-    "sum": 66,
-    "norm_sum": 0.66,
-    "cnt": 29,
-    "cnt_norm": 0.29
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Алтай",
@@ -46,10 +46,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 4,
-    "sum": 45,
-    "norm_sum": 0.45,
-    "cnt": 27,
-    "cnt_norm": 0.27
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Дагестан",
@@ -59,10 +59,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 5,
-    "sum": 98,
-    "norm_sum": 0.98,
-    "cnt": 8,
-    "cnt_norm": 0.08
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Ингушетия",
@@ -72,10 +72,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 6,
-    "sum": 16,
-    "norm_sum": 0.16,
-    "cnt": 91,
-    "cnt_norm": 0.91
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Кабардино-Балкарская",
@@ -85,10 +85,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 7,
-    "sum": 69,
-    "norm_sum": 0.69,
-    "cnt": 29,
-    "cnt_norm": 0.29
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Калмыкия",
@@ -98,10 +98,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 8,
-    "sum": 20,
-    "norm_sum": 0.2,
-    "cnt": 61,
-    "cnt_norm": 0.61
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Карачаево-Черкесская",
@@ -111,10 +111,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 9,
-    "sum": 11,
-    "norm_sum": 0.11,
-    "cnt": 27,
-    "cnt_norm": 0.27
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Карелия",
@@ -124,10 +124,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 10,
-    "sum": 5,
-    "norm_sum": 0.05,
-    "cnt": 64,
-    "cnt_norm": 0.64
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Коми",
@@ -138,9 +138,9 @@
     "y": 0,
     "geoname_code": 11,
     "sum": 0,
-    "norm_sum": 0.0,
-    "cnt": 49,
-    "cnt_norm": 0.49
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Марий Эл",
@@ -150,10 +150,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 12,
-    "sum": 41,
-    "norm_sum": 0.41,
-    "cnt": 19,
-    "cnt_norm": 0.19
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Мордовия",
@@ -163,10 +163,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 13,
-    "sum": 13,
-    "norm_sum": 0.13,
-    "cnt": 99,
-    "cnt_norm": 0.99
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Саха /Якутия/",
@@ -176,10 +176,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 14,
-    "sum": 83,
-    "norm_sum": 0.83,
-    "cnt": 51,
-    "cnt_norm": 0.51
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Северная Осетия - Алания",
@@ -189,10 +189,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 15,
-    "sum": 78,
-    "norm_sum": 0.78,
-    "cnt": 93,
-    "cnt_norm": 0.93
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Татарстан",
@@ -202,10 +202,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 16,
-    "sum": 81,
-    "norm_sum": 0.81,
-    "cnt": 77,
-    "cnt_norm": 0.77
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Тыва",
@@ -215,10 +215,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 17,
-    "sum": 87,
-    "norm_sum": 0.87,
-    "cnt": 1,
-    "cnt_norm": 0.01
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Удмуртская",
@@ -228,10 +228,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 18,
-    "sum": 25,
-    "norm_sum": 0.25,
-    "cnt": 60,
-    "cnt_norm": 0.6
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Хакасия",
@@ -241,10 +241,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 19,
-    "sum": 92,
-    "norm_sum": 0.92,
-    "cnt": 98,
-    "cnt_norm": 0.98
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Чеченская",
@@ -254,10 +254,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 20,
-    "sum": 42,
-    "norm_sum": 0.42,
-    "cnt": 59,
-    "cnt_norm": 0.59
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Чувашская Республика",
@@ -267,10 +267,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 21,
-    "sum": 66,
-    "norm_sum": 0.66,
-    "cnt": 88,
-    "cnt_norm": 0.88
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Алтайский",
@@ -280,10 +280,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 22,
-    "sum": 40,
-    "norm_sum": 0.4,
-    "cnt": 19,
-    "cnt_norm": 0.19
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Краснодарский",
@@ -293,10 +293,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 23,
-    "sum": 33,
-    "norm_sum": 0.33,
-    "cnt": 66,
-    "cnt_norm": 0.66
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Красноярский",
@@ -306,10 +306,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 24,
-    "sum": 30,
-    "norm_sum": 0.3,
-    "cnt": 36,
-    "cnt_norm": 0.36
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Приморский",
@@ -319,10 +319,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 25,
-    "sum": 45,
-    "norm_sum": 0.45,
-    "cnt": 28,
-    "cnt_norm": 0.28
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Ставропольский",
@@ -332,10 +332,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 26,
-    "sum": 53,
-    "norm_sum": 0.53,
-    "cnt": 97,
-    "cnt_norm": 0.97
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Хабаровский",
@@ -345,10 +345,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 27,
-    "sum": 91,
-    "norm_sum": 0.91,
-    "cnt": 78,
-    "cnt_norm": 0.78
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Амурская",
@@ -358,10 +358,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 28,
-    "sum": 70,
-    "norm_sum": 0.7,
-    "cnt": 83,
-    "cnt_norm": 0.83
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Архангельская",
@@ -371,10 +371,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 29,
-    "sum": 69,
-    "norm_sum": 0.69,
-    "cnt": 82,
-    "cnt_norm": 0.82
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Астраханская",
@@ -384,10 +384,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 30,
-    "sum": 24,
-    "norm_sum": 0.24,
-    "cnt": 58,
-    "cnt_norm": 0.58
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Белгородская",
@@ -397,10 +397,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 31,
-    "sum": 79,
-    "norm_sum": 0.79,
-    "cnt": 75,
-    "cnt_norm": 0.75
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Брянская",
@@ -410,10 +410,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 32,
-    "sum": 11,
-    "norm_sum": 0.11,
-    "cnt": 30,
-    "cnt_norm": 0.3
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Владимирская",
@@ -423,10 +423,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 33,
-    "sum": 83,
-    "norm_sum": 0.83,
-    "cnt": 51,
-    "cnt_norm": 0.51
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Волгоградская",
@@ -436,10 +436,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 34,
-    "sum": 44,
-    "norm_sum": 0.44,
-    "cnt": 25,
-    "cnt_norm": 0.25
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Вологодская",
@@ -449,10 +449,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 35,
-    "sum": 59,
-    "norm_sum": 0.59,
-    "cnt": 38,
-    "cnt_norm": 0.38
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Воронежская",
@@ -462,10 +462,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 36,
-    "sum": 16,
-    "norm_sum": 0.16,
-    "cnt": 40,
-    "cnt_norm": 0.4
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Ивановская",
@@ -475,10 +475,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 37,
-    "sum": 90,
-    "norm_sum": 0.9,
-    "cnt": 21,
-    "cnt_norm": 0.21
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Иркутская",
@@ -488,10 +488,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 38,
-    "sum": 23,
-    "norm_sum": 0.23,
-    "cnt": 65,
-    "cnt_norm": 0.65
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Калининградская",
@@ -501,10 +501,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 39,
-    "sum": 4,
-    "norm_sum": 0.04,
-    "cnt": 29,
-    "cnt_norm": 0.29
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Калужская",
@@ -514,10 +514,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 40,
-    "sum": 52,
-    "norm_sum": 0.52,
-    "cnt": 16,
-    "cnt_norm": 0.16
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Камчатский",
@@ -527,10 +527,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 41,
-    "sum": 99,
-    "norm_sum": 0.99,
-    "cnt": 13,
-    "cnt_norm": 0.13
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Кемеровская область - Кузбасс",
@@ -540,10 +540,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 42,
-    "sum": 74,
-    "norm_sum": 0.74,
-    "cnt": 79,
-    "cnt_norm": 0.79
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Кировская",
@@ -553,10 +553,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 43,
-    "sum": 55,
-    "norm_sum": 0.55,
-    "cnt": 10,
-    "cnt_norm": 0.1
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Костромская",
@@ -566,10 +566,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 44,
-    "sum": 61,
-    "norm_sum": 0.61,
-    "cnt": 61,
-    "cnt_norm": 0.61
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Курганская",
@@ -579,10 +579,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 45,
-    "sum": 62,
-    "norm_sum": 0.62,
-    "cnt": 37,
-    "cnt_norm": 0.37
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Курская",
@@ -592,10 +592,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 46,
-    "sum": 75,
-    "norm_sum": 0.75,
-    "cnt": 2,
-    "cnt_norm": 0.02
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Ленинградская",
@@ -605,10 +605,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 47,
-    "sum": 90,
-    "norm_sum": 0.9,
-    "cnt": 1,
-    "cnt_norm": 0.01
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Липецкая",
@@ -618,10 +618,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 48,
-    "sum": 52,
-    "norm_sum": 0.52,
-    "cnt": 28,
-    "cnt_norm": 0.28
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Магаданская",
@@ -631,10 +631,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 49,
-    "sum": 54,
-    "norm_sum": 0.54,
-    "cnt": 57,
-    "cnt_norm": 0.57
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Московская",
@@ -644,10 +644,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 50,
-    "sum": 45,
-    "norm_sum": 0.45,
-    "cnt": 15,
-    "cnt_norm": 0.15
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Мурманская",
@@ -657,10 +657,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 51,
-    "sum": 3,
-    "norm_sum": 0.03,
-    "cnt": 24,
-    "cnt_norm": 0.24
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Нижегородская",
@@ -670,10 +670,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 52,
-    "sum": 9,
-    "norm_sum": 0.09,
-    "cnt": 5,
-    "cnt_norm": 0.05
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Новгородская",
@@ -683,10 +683,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 53,
-    "sum": 72,
-    "norm_sum": 0.72,
-    "cnt": 96,
-    "cnt_norm": 0.96
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Новосибирская",
@@ -696,10 +696,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 54,
-    "sum": 57,
-    "norm_sum": 0.57,
-    "cnt": 31,
-    "cnt_norm": 0.31
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Омская",
@@ -709,10 +709,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 55,
-    "sum": 52,
-    "norm_sum": 0.52,
-    "cnt": 93,
-    "cnt_norm": 0.93
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Оренбургская",
@@ -722,10 +722,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 56,
-    "sum": 8,
-    "norm_sum": 0.08,
-    "cnt": 81,
-    "cnt_norm": 0.81
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Орловская",
@@ -735,10 +735,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 57,
-    "sum": 9,
-    "norm_sum": 0.09,
-    "cnt": 2,
-    "cnt_norm": 0.02
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Пензенская",
@@ -748,10 +748,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 58,
-    "sum": 70,
-    "norm_sum": 0.7,
-    "cnt": 14,
-    "cnt_norm": 0.14
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Пермский",
@@ -761,10 +761,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 59,
-    "sum": 27,
-    "norm_sum": 0.27,
-    "cnt": 68,
-    "cnt_norm": 0.68
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Псковская",
@@ -774,10 +774,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 60,
-    "sum": 69,
-    "norm_sum": 0.69,
-    "cnt": 86,
-    "cnt_norm": 0.86
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Ростовская",
@@ -787,10 +787,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 61,
-    "sum": 60,
-    "norm_sum": 0.6,
-    "cnt": 32,
-    "cnt_norm": 0.32
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Рязанская",
@@ -800,10 +800,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 62,
-    "sum": 32,
-    "norm_sum": 0.32,
-    "cnt": 51,
-    "cnt_norm": 0.51
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Самарская",
@@ -813,10 +813,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 63,
-    "sum": 90,
-    "norm_sum": 0.9,
-    "cnt": 61,
-    "cnt_norm": 0.61
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Саратовская",
@@ -826,10 +826,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 64,
-    "sum": 15,
-    "norm_sum": 0.15,
-    "cnt": 90,
-    "cnt_norm": 0.9
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Сахалинская",
@@ -839,10 +839,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 65,
-    "sum": 28,
-    "norm_sum": 0.28,
-    "cnt": 56,
-    "cnt_norm": 0.56
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Свердловская",
@@ -852,10 +852,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 66,
-    "sum": 4,
-    "norm_sum": 0.04,
-    "cnt": 40,
-    "cnt_norm": 0.4
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Смоленская",
@@ -865,10 +865,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 67,
-    "sum": 68,
-    "norm_sum": 0.68,
-    "cnt": 19,
-    "cnt_norm": 0.19
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Тамбовская",
@@ -878,10 +878,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 68,
-    "sum": 39,
-    "norm_sum": 0.39,
-    "cnt": 98,
-    "cnt_norm": 0.98
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Тверская",
@@ -891,10 +891,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 69,
-    "sum": 47,
-    "norm_sum": 0.47,
-    "cnt": 1,
-    "cnt_norm": 0.01
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Томская",
@@ -904,10 +904,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 70,
-    "sum": 4,
-    "norm_sum": 0.04,
-    "cnt": 70,
-    "cnt_norm": 0.7
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Тульская",
@@ -917,10 +917,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 71,
-    "sum": 64,
-    "norm_sum": 0.64,
-    "cnt": 10,
-    "cnt_norm": 0.1
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Тюменская",
@@ -930,10 +930,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 72,
-    "sum": 53,
-    "norm_sum": 0.53,
-    "cnt": 87,
-    "cnt_norm": 0.87
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Ульяновская",
@@ -943,10 +943,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 73,
-    "sum": 82,
-    "norm_sum": 0.82,
-    "cnt": 2,
-    "cnt_norm": 0.02
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Челябинская",
@@ -956,10 +956,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 74,
-    "sum": 93,
-    "norm_sum": 0.93,
-    "cnt": 16,
-    "cnt_norm": 0.16
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Забайкальский",
@@ -969,10 +969,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 75,
-    "sum": 6,
-    "norm_sum": 0.06,
-    "cnt": 51,
-    "cnt_norm": 0.51
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Ярославская",
@@ -982,10 +982,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 76,
-    "sum": 99,
-    "norm_sum": 0.99,
-    "cnt": 32,
-    "cnt_norm": 0.32
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Москва",
@@ -995,10 +995,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 77,
-    "sum": 2,
-    "norm_sum": 0.02,
-    "cnt": 13,
-    "cnt_norm": 0.13
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Санкт-Петербург",
@@ -1008,10 +1008,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 78,
-    "sum": 51,
-    "norm_sum": 0.51,
-    "cnt": 50,
-    "cnt_norm": 0.5
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Еврейская",
@@ -1021,10 +1021,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 79,
-    "sum": 92,
-    "norm_sum": 0.92,
-    "cnt": 60,
-    "cnt_norm": 0.6
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Ненецкий",
@@ -1034,10 +1034,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 83,
-    "sum": 82,
-    "norm_sum": 0.82,
-    "cnt": 7,
-    "cnt_norm": 0.07
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Ханты-Мансийский Автономный округ - Югра",
@@ -1047,10 +1047,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 86,
-    "sum": 24,
-    "norm_sum": 0.24,
-    "cnt": 45,
-    "cnt_norm": 0.45
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Чукотский",
@@ -1060,10 +1060,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 87,
-    "sum": 84,
-    "norm_sum": 0.84,
-    "cnt": 49,
-    "cnt_norm": 0.49
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Ямало-Ненецкий",
@@ -1073,10 +1073,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 89,
-    "sum": 70,
-    "norm_sum": 0.7,
-    "cnt": 22,
-    "cnt_norm": 0.22
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Крым",
@@ -1086,10 +1086,10 @@
     "x": 0,
     "y": 0,
     "geoname_code": 91,
-    "sum": 41,
-    "norm_sum": 0.41,
-    "cnt": 60,
-    "cnt_norm": 0.6
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   },
   {
     "name": "Севастополь",
@@ -1099,9 +1099,9 @@
     "x": 0,
     "y": 0,
     "geoname_code": 92,
-    "sum": 71,
-    "norm_sum": 0.71,
-    "cnt": 28,
-    "cnt_norm": 0.28
+    "sum": 0,
+    "norm_sum": 0,
+    "cnt": 0,
+    "cnt_norm": 0
   }
 ]
