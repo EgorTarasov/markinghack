@@ -59,4 +59,4 @@ async def get_map(token=Depends(oauth2_scheme), db: Session = Depends(get_db)):
     result = volumes_manufacturer_region(sold_data, additional_data)
     log.info("computation took %s seconds", perf_counter() - start)
 
-    return result
+    return result.values()
