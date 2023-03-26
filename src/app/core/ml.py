@@ -209,17 +209,18 @@ def shops_manufacturer(dict1: dict, dict2: dict) -> dict:
         ["region_code", "id_sp_", "dt"]
     ]
 
-    info = dict()
-    for i in map(int, shop_id["region_code"].unique()):
-        data = shop_id[shop_id["region_code"] == i][:5][["id_sp_", "dt"]]
-        id = list(map(str, data["id_sp_"].values))
-        dt = list(map(int, data["dt"].values))
-        info[i] = {
-            "id": id,  # id магазина (object)
-            "count": dt,
-        }  # кол-во выведенных из оборота товаров (int)
+    global REGION_CODES
+    if not "shops_manufacturer" in REGION_CODES[77]:
+        for i in map(int, shop_id["region_code"].unique()):
+            data = shop_id[shop_id["region_code"] == i][:5][["id_sp_", "dt"]]
+            id = list(map(str, data["id_sp_"].values))
+            dt = list(map(int, data["dt"].values))
+            REGION_CODES[i]["shops_manufacturer"] = {
+                "id": id,  # id магазина (object)
+                "count": dt,
+            }
 
-    return info
+    return REGION_CODES
 
 
 def volumes_manufacturer_region(dict1, dict2):
@@ -248,18 +249,17 @@ def volumes_manufacturer_region(dict1, dict2):
     )
     sum_price1 = sum(list(map(int, data_month["sum_price"].values)))
     cnt1 = sum(list(map(int, data_month["cnt"].values)))
-
-    regions = REGION_CODES.copy()
+    global REGION_CODES
     for i in map(int, data_month_region["region_code"].unique()):
         data = data_month_region[data_month_region["region_code"] == i]
         sum_price = list(map(int, data["sum_price"].values))
         cnt = list(map(int, data["cnt"].values))
-        regions[i]["cnt"] = sum(cnt)
-        regions[i]["sum"] = sum(sum_price)
-        regions[i]["norm_sum"] = sum(sum_price) / sum_price1
-        regions[i]["cnt_norm"] = sum(cnt) / cnt1
+        REGION_CODES[i]["cnt"] = sum(cnt)
+        REGION_CODES[i]["sum"] = sum(sum_price)
+        REGION_CODES[i]["norm_sum"] = sum(sum_price) / sum_price1
+        REGION_CODES[i]["cnt_norm"] = sum(cnt) / cnt1
 
-    df = pd.DataFrame(regions)
+    df = pd.DataFrame(REGION_CODES)
     df.loc["norm_sum"] = (df.loc["norm_sum"] - min(df.loc["norm_sum"])) / (
         max(df.loc["norm_sum"]) - min(df.loc["norm_sum"])
     )
@@ -271,6 +271,7 @@ def volumes_manufacturer_region(dict1, dict2):
     log.info(df)
     df.fillna("")
     log.info(df)
+    REGION_CODES = df.to_dict()
     return df.to_dict()
 
 
@@ -300,6 +301,7 @@ def volumes_manufacturer(dict1: dict, dict2: dict) -> dict:  # не нужно
     month = list(map(int, data["Месяц"].values))
     count = list(map(int, data["cnt"].values))
     sum_price = list(map(int, data["sum_price"].values))
+
     info = {
         "month": month,  # месяц
         "count": count,  # кол-во выведенного из оборота товара
@@ -334,18 +336,18 @@ def popular_offline_gtin_manufacturer_region(dict1: dict, dict2: dict) -> dict:
     popular = groups.sort_values(by=["cnt"], ascending=False)[
         ["region_code", "gtin", "cnt"]
     ]
+    global REGION_CODES
 
-    info_popular = dict()
     for i in map(int, popular["region_code"].unique()):
         data = popular[popular["region_code"] == i][:5][["gtin", "cnt"]]
         gtin = list(map(str, data["gtin"].values))
         cnt = list(map(int, data["cnt"].values))
-        info_popular[i] = {
+        REGION_CODES[i]["popular_offline_gtin_manufacturer_region"] = {
             "gtin": gtin,  # gtin товара
             "count": cnt,
         }  # кол-во товара проданного оффлайн
 
-    return info_popular
+    return REGION_CODES
 
 
 def popular_offline_gtin_manufacturer(dict1: dict, dict2: dict) -> dict:

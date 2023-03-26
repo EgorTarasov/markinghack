@@ -15,9 +15,11 @@ from app.core.ml import (
     popular_online_gtin_manufacturer,
     shops_manufacturer_count_region,
     shops_manufacturer_count,
+    REGION_CODES,
 )
 
 from app.utils.logging import log
+
 
 from time import perf_counter
 
@@ -128,7 +130,10 @@ async def get_mertics(token=Depends(oauth2_scheme), db: Session = Depends(get_db
     user = get_current_user(db, token)
     start = perf_counter()
     log.info("computing...")
-
+    # check if shops_manufacturer not in REGION_CODES objects
+    if any("shops_manufacturer" in d for d in REGION_CODES.values()):
+        log.info(f"calculated {len(REGION_CODES)}  in {perf_counter() - start}")
+        return REGION_CODES
     start = perf_counter()
     a = crud.get_sold_goods_for_computation(db, user)
     dt, inn, id_sp_, type_operation = zip(*a)
@@ -159,7 +164,8 @@ async def get_volume_metrics(
     token=Depends(oauth2_scheme), db: Session = Depends(get_db)
 ):
     """Количество единиц товара и стоимость всего проданного товара для 1 производителя в целом"""
-
+    if any("volumes_manufacturer" in d for d in REGION_CODES.values()):
+        log.info(f"calculated {len(REGION_CODES)}  in {perf_counter() - start}")
     user = get_current_user(db, token)
     start = perf_counter()
     log.info("computing...")
@@ -193,8 +199,14 @@ async def get_popular_offline_metrics_by_region(
     token=Depends(oauth2_scheme), db: Session = Depends(get_db)
 ):
     # rewrite sql query
-    user = get_current_user(db, token)
     start = perf_counter()
+    if any(
+        "popular_offline_gtin_manufacturer_region" in d for d in REGION_CODES.values()
+    ):
+        log.info(f"calculated in {perf_counter() - start}")
+        return REGION_CODES
+    user = get_current_user(db, token)
+
     log.info("computing...")
     a = crud.get_sold_goods_for_offline_metrics(db, user)
     dt, id_sp_, gtin, type_operation, price, cnt = zip(*a)
